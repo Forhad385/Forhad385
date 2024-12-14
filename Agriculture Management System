@@ -1,0 +1,254 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+// Crop.java
+class Crop {
+    private String cropName;
+    private String plantingDate;
+    private String harvestDate;
+    private double yield;
+
+    // Constructor
+    public Crop(String cropName, String plantingDate, String harvestDate, double yield) {
+        this.cropName = cropName;
+        this.plantingDate = plantingDate;
+        this.harvestDate = harvestDate;
+        this.yield = yield;
+    }
+
+    // Getters and Setters
+    public String getCropName() {
+        return cropName;
+    }
+
+    public void setCropName(String cropName) {
+        this.cropName = cropName;
+    }
+
+    public String getPlantingDate() {
+        return plantingDate;
+    }
+
+    public void setPlantingDate(String plantingDate) {
+        this.plantingDate = plantingDate;
+    }
+
+    public String getHarvestDate() {
+        return harvestDate;
+    }
+
+    public void setHarvestDate(String harvestDate) {
+        this.harvestDate = harvestDate;
+    }
+
+    public double getYield() {
+        return yield;
+    }
+
+    public void setYield(double yield) {
+        this.yield = yield;
+    }
+
+    // Display Crop Details
+    public void displayCropInfo() {
+        System.out.println("Crop Name: " + cropName);
+        System.out.println("Planting Date: " + plantingDate);
+        System.out.println("Harvest Date: " + harvestDate);
+        System.out.println("Expected Yield: " + yield + " tons");
+    }
+}
+
+// CropManager.java
+class CropManager {
+    private ArrayList<Crop> crops;
+
+    public CropManager() {
+        crops = new ArrayList<>();
+    }
+
+    // Add a new crop
+    public void addCrop(Crop crop) {
+        crops.add(crop);
+    }
+
+    // Display all crops
+    public void displayAllCrops() {
+        if (crops.isEmpty()) {
+            System.out.println("No crops available.");
+        } else {
+            for (Crop crop : crops) {
+                crop.displayCropInfo();
+            }
+        }
+    }
+}
+
+// Livestock.java
+class Livestock {
+    private String animalType;
+    private String breed;
+    private int age;
+    private double weight;
+
+    // Constructor
+    public Livestock(String animalType, String breed, int age, double weight) {
+        this.animalType = animalType;
+        this.breed = breed;
+        this.age = age;
+        this.weight = weight;
+    }
+
+    // Getters and Setters
+    public String getAnimalType() {
+        return animalType;
+    }
+
+    public void setAnimalType(String animalType) {
+        this.animalType = animalType;
+    }
+
+    public String getBreed() {
+        return breed;
+    }
+
+    public void setBreed(String breed) {
+        this.breed = breed;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
+    // Display Livestock Details
+    public void displayLivestockInfo() {
+        System.out.println("Animal Type: " + animalType);
+        System.out.println("Breed: " + breed);
+        System.out.println("Age: " + age + " years");
+        System.out.println("Weight: " + weight + " kg");
+    }
+}
+
+// LivestockManager.java
+class LivestockManager {
+    private ArrayList<Livestock> livestockList;
+
+    public LivestockManager() {
+        livestockList = new ArrayList<>();
+    }
+
+    // Add new livestock
+    public void addLivestock(Livestock livestock) {
+        livestockList.add(livestock);
+    }
+
+    // Display all livestock
+    public void displayAllLivestock() {
+        if (livestockList.isEmpty()) {
+            System.out.println("No livestock available.");
+        } else {
+            for (Livestock livestock : livestockList) {
+                livestock.displayLivestockInfo();
+            }
+        }
+    }
+}
+
+// Main.java
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        CropManager cropManager = new CropManager();
+        LivestockManager livestockManager = new LivestockManager();
+
+        while (true) {
+            System.out.println("\nAgriculture Management System");
+            System.out.println("1. Manage Crops");
+            System.out.println("2. Manage Livestock");
+            System.out.println("3. Exit");
+            System.out.print("Enter your choice: ");
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+
+            switch (choice) {
+                case 1:
+                    System.out.println("\nCrop Management:");
+                    System.out.println("1. Add Crop");
+                    System.out.println("2. Display All Crops");
+                    System.out.print("Enter your choice: ");
+                    int cropChoice = scanner.nextInt();
+                    scanner.nextLine(); // Consume newline
+
+                    if (cropChoice == 1) {
+                        // Add crop
+                        System.out.print("Enter Crop Name: ");
+                        String cropName = scanner.nextLine();
+                        System.out.print("Enter Planting Date (YYYY-MM-DD): ");
+                        String plantingDate = scanner.nextLine();
+                        System.out.print("Enter Harvest Date (YYYY-MM-DD): ");
+                        String harvestDate = scanner.nextLine();
+                        System.out.print("Enter Expected Yield (tons): ");
+                        double yield = scanner.nextDouble();
+                        scanner.nextLine(); // Consume newline
+
+                        Crop crop = new Crop(cropName, plantingDate, harvestDate, yield);
+                        cropManager.addCrop(crop);
+                        System.out.println("Crop added successfully!");
+                    } else if (cropChoice == 2) {
+                        // Display all crops
+                        cropManager.displayAllCrops();
+                    }
+                    break;
+
+                case 2:
+                    System.out.println("\nLivestock Management:");
+                    System.out.println("1. Add Livestock");
+                    System.out.println("2. Display All Livestock");
+                    System.out.print("Enter your choice: ");
+                    int livestockChoice = scanner.nextInt();
+                    scanner.nextLine(); // Consume newline
+
+                    if (livestockChoice == 1) {
+                        // Add livestock
+                        System.out.print("Enter Animal Type (e.g., Cow, Sheep): ");
+                        String animalType = scanner.nextLine();
+                        System.out.print("Enter Breed: ");
+                        String breed = scanner.nextLine();
+                        System.out.print("Enter Age (years): ");
+                        int age = scanner.nextInt();
+                        System.out.print("Enter Weight (kg): ");
+                        double weight = scanner.nextDouble();
+                        scanner.nextLine(); // Consume newline
+
+                        Livestock livestock = new Livestock(animalType, breed, age, weight);
+                        livestockManager.addLivestock(livestock);
+                        System.out.println("Livestock added successfully!");
+                    } else if (livestockChoice == 2) {
+                        // Display all livestock
+                        livestockManager.displayAllLivestock();
+                    }
+                    break;
+
+                case 3:
+                    System.out.println("Exiting system...");
+                    scanner.close();
+                    System.exit(0);
+                    break;
+
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        }
+    }
+}
